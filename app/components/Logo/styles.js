@@ -15,10 +15,9 @@ const styles = EStyleSheet.create({
   },
   logo: {
     width: imageWidth / 2,
-    height: imageWidth / 2,
   },
   text: {
-    marginTop: 20,
+    marginTop: 5,
     letterSpacing: -0.5,
     color: '$white',
     fontWeight: 'bold',
