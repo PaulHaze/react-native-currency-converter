@@ -4,9 +4,10 @@ import Home from './screens/Home';
 
 EStyleSheet.build({
   $primaryBlue: '#4F6D7A',
-  $white: 'rgba(255,255,255,0.9)',
+  $white: '#ffffff',
   $border: '#E2E2E2',
   $inputText: '#797979',
+  $lightGrey: '#eff6f0',
 });
 
 export default () => <Home />;

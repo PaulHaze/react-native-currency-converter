@@ -6,6 +6,9 @@ const BORDER_RADIUS = 4;
 
 // add E before exporting
 export default EStyleSheet.create({
+  $buttonBackgroundBase: '$white',
+  $buttonBackgroundPress: 0.1,
+
   container: {
     backgroundColor: '$white',
     width: '90%',
@@ -14,6 +17,9 @@ export default EStyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 11,
+  },
+  containerDisabled: {
+    backgroundColor: '$lightGrey',
   },
   buttonContainer: {
     height: INPUT_HEIGHT,
