@@ -10,6 +10,7 @@
     "lint:fix": "eslint app/ --fix"
   },
   "dependencies": {
+    "@types/react-native": "^0.60.2",
     "color": "^3.1.2",
     "expo": "^33.0.0",
     "moment": "^2.24.0",
