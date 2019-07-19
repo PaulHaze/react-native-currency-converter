@@ -1,4 +1,4 @@
-import ClearButton from './ClearButton';
+import SwitchCurrencyButton from './ClearButton';
 import styles from './styles';
 
-export { ClearButton, styles };
+export { SwitchCurrencyButton, styles };
