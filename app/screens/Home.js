@@ -19,6 +19,8 @@ class Home extends Component {
       exchangeAmount: 69.67,
       baseCurrency: 'AUD',
       quoteCurrency: 'USD',
+      baseRate: 1,
+      exchangeRate: 0.6997,
     };
   }
 
@@ -31,7 +33,6 @@ class Home extends Component {
   };
 
   handleSwitchCurrencies = () => {
-    console.log('switch pressed');
     this.setState(prevState => ({
       baseCurrency: prevState.quoteCurrency,
       quoteCurrency: prevState.baseCurrency,
@@ -48,10 +49,12 @@ class Home extends Component {
 
   render() {
     const {
-      currencyAmount,
       baseCurrency,
       quoteCurrency,
+      currencyAmount,
       exchangeAmount,
+      baseRate,
+      exchangeRate,
     } = this.state;
     return (
       <Container>
@@ -64,7 +67,12 @@ class Home extends Component {
           onPress={this.handlePressBaseCurrency}
           onChangeText={this.handleTextChange}
         />
-        <SwitchCurrencyButton onPress={this.handleSwitchCurrencies} />
+        <SwitchCurrencyButton
+          baseCurr={baseCurrency}
+          quoteCurr={quoteCurrency}
+          exchangeRate={exchangeRate}
+          onPress={this.handleSwitchCurrencies}
+        />
         <InputWithButton
           buttonText={quoteCurrency}
           defaultValue={exchangeAmount.toString()}
