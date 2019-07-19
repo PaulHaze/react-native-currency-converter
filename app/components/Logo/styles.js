@@ -6,6 +6,7 @@ const imageWidth = Dimensions.get('window').width / 2;
 const styles = EStyleSheet.create({
   container: {
     alignItems: 'center',
+    marginBottom: 30,
   },
   containerImage: {
     alignItems: 'center',
