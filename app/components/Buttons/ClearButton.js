@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { View, TouchableOpacity, Image } from 'react-native';
 import styles from './styles';
 
-const SwapCurrencyBtn = () => (
+const ClearButton = ({ onPress }) => (
   <View style={styles.container}>
-    <TouchableOpacity underlayColor="white">
+    <TouchableOpacity onPress={onPress} underlayColor="white">
       <View>
         <Image
           resizeMode="contain"
@@ -15,4 +16,8 @@ const SwapCurrencyBtn = () => (
   </View>
 );
 
-export default SwapCurrencyBtn;
+ClearButton.propTypes = {
+  onPress: PropTypes.func,
+};
+
+export default ClearButton;

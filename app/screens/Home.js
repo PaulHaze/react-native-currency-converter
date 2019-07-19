@@ -4,7 +4,7 @@ import { StatusBar } from 'react-native';
 import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
-import SwapCurrencyBtn from '../components/Button/ClearButton';
+import { ClearButton } from '../components/Buttons';
 
 const TEMP_BASE_CURRENCY = 'AUD';
 const TEMP_QUOTE_CURRENCY = 'USD';
@@ -46,7 +46,7 @@ class Home extends Component {
           keyboardType="numeric"
           onChangeText={this.handleTextChange}
         />
-        <SwapCurrencyBtn />
+        <ClearButton />
         <InputWithButton
           buttonText={TEMP_QUOTE_CURRENCY}
           defaultValue={TEMP_QUOTE_PRICE}
