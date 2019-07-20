@@ -6,9 +6,8 @@ import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
 import { SwitchCurrencyButton } from '../components/Buttons';
 
-// const TEMP_BASE_CURRENCY = 'AUD';
-// const TEMP_QUOTE_CURRENCY = 'USD';
-// const TEMP_QUOTE_PRICE = '69.84';
+const API_KEY = 'b75149abcbe55c561817ab5976d0a184';
+const API_URL = 'http://data.fixer.io/api/';
 
 class Home extends Component {
   constructor(props) {
