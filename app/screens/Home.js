@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
 import { StatusBar } from 'react-native';
 
@@ -5,9 +7,11 @@ import { Container } from '../components/Container';
 import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
 import { SwitchCurrencyButton } from '../components/Buttons';
+import { LastConverted } from '../components/Text';
 
 const API_KEY = 'b75149abcbe55c561817ab5976d0a184';
 const API_URL = 'http://data.fixer.io/api/';
+const CONVERSION_DATE = new Date();
 
 class Home extends Component {
   constructor(props) {
@@ -18,7 +22,6 @@ class Home extends Component {
       exchangeAmount: 69.67,
       baseCurrency: 'AUD',
       quoteCurrency: 'USD',
-      baseRate: 1,
       exchangeRate: 0.6997,
     };
   }
@@ -52,7 +55,6 @@ class Home extends Component {
       quoteCurrency,
       currencyAmount,
       exchangeAmount,
-      baseRate,
       exchangeRate,
     } = this.state;
     return (
@@ -71,6 +73,12 @@ class Home extends Component {
           quoteCurr={quoteCurrency}
           exchangeRate={exchangeRate}
           onPress={this.handleSwitchCurrencies}
+        />
+        <LastConverted
+          date={CONVERSION_DATE}
+          base={baseCurrency}
+          quote={quoteCurrency}
+          exchangeRate={exchangeRate}
         />
         <InputWithButton
           buttonText={quoteCurrency}
