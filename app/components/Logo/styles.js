@@ -4,6 +4,10 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 const imageWidth = Dimensions.get('window').width / 2;
 
 const styles = EStyleSheet.create({
+  $largeContainerSize: imageWidth,
+  $largeImageSize: imageWidth / 2,
+  $smallContainerSize: imageWidth / 2,
+  $smallImageSize: imageWidth / 4,
   container: {
     alignItems: 'center',
     marginBottom: 30,
@@ -11,11 +15,11 @@ const styles = EStyleSheet.create({
   containerImage: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: imageWidth,
-    height: imageWidth,
+    width: '$largeContainerSize',
+    height: '$largeContainerSize',
   },
   logo: {
-    width: imageWidth / 2,
+    width: '$largeImageSize',
   },
   text: {
     marginTop: 5,

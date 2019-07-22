@@ -16,7 +16,7 @@ export default EStyleSheet.create({
     borderRadius: BORDER_RADIUS,
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 9,
+    marginVertical: 3,
   },
   containerDisabled: {
     backgroundColor: '$lightGrey',
