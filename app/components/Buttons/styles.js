@@ -3,20 +3,12 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 const styles = EStyleSheet.create({
   container: {
-    marginBottom: 35,
+    marginBottom: 30,
   },
   image: {
     position: 'absolute',
-    right: 118,
-  },
-  textView: {
-    position: 'absolute',
-    right: -160,
-    top: 10,
-  },
-  text: {
-    fontSize: 14,
-    color: '$white',
+    right: 290,
+    width: 20,
   },
 });
 

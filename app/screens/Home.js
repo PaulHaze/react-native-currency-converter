@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, KeyboardAvoidingView } from 'react-native';
 
 import { Container } from '../components/Container';
+import { Header } from '../components/Header';
 import { Logo } from '../components/Logo';
 import { InputWithButton } from '../components/TextInput';
 import { SwitchCurrencyButton } from '../components/Buttons';
@@ -34,6 +35,10 @@ class Home extends Component {
     console.log('quote currency pressed');
   };
 
+  handleOptionsPress = () => {
+    console.log('options pressed');
+  };
+
   handleSwitchCurrencies = () => {
     this.setState(prevState => ({
       baseCurrency: prevState.quoteCurrency,
@@ -60,32 +65,36 @@ class Home extends Component {
     return (
       <Container>
         <StatusBar translucent={false} barStyle="light-content" />
+        <Header onPress={this.handleOptionsPress} />
         <Logo />
-        <InputWithButton
-          keyboardType="numeric"
-          buttonText={baseCurrency}
-          defaultValue={currencyAmount.toString()}
-          onPress={this.handlePressBaseCurrency}
-          onChangeText={this.handleTextChange}
-        />
-        <SwitchCurrencyButton
-          baseCurr={baseCurrency}
-          quoteCurr={quoteCurrency}
-          exchangeRate={exchangeRate}
-          onPress={this.handleSwitchCurrencies}
-        />
-        <LastConverted
-          date={CONVERSION_DATE}
-          base={baseCurrency}
-          quote={quoteCurrency}
-          exchangeRate={exchangeRate}
-        />
-        <InputWithButton
-          buttonText={quoteCurrency}
-          defaultValue={exchangeAmount.toString()}
-          onPress={this.handlePressQuoteCurrency}
-          editable={false}
-        />
+        <KeyboardAvoidingView behavior="padding">
+          <InputWithButton
+            keyboardType="numeric"
+            buttonText={baseCurrency}
+            defaultValue={currencyAmount.toString()}
+            onPress={this.handlePressBaseCurrency}
+            onChangeText={this.handleTextChange}
+          />
+          <SwitchCurrencyButton
+            baseCurr={baseCurrency}
+            quoteCurr={quoteCurrency}
+            exchangeRate={exchangeRate}
+            onPress={this.handleSwitchCurrencies}
+          />
+
+          <InputWithButton
+            buttonText={quoteCurrency}
+            defaultValue={exchangeAmount.toString()}
+            onPress={this.handlePressQuoteCurrency}
+            editable={false}
+          />
+          <LastConverted
+            date={CONVERSION_DATE}
+            base={baseCurrency}
+            quote={quoteCurrency}
+            exchangeRate={exchangeRate}
+          />
+        </KeyboardAvoidingView>
       </Container>
     );
   }
