@@ -81,18 +81,17 @@ class Home extends Component {
             exchangeRate={exchangeRate}
             onPress={this.handleSwitchCurrencies}
           />
-
-          <InputWithButton
-            buttonText={quoteCurrency}
-            defaultValue={exchangeAmount.toString()}
-            onPress={this.handlePressQuoteCurrency}
-            editable={false}
-          />
           <LastConverted
             date={CONVERSION_DATE}
             base={baseCurrency}
             quote={quoteCurrency}
             exchangeRate={exchangeRate}
+          />
+          <InputWithButton
+            buttonText={quoteCurrency}
+            defaultValue={exchangeAmount.toString()}
+            onPress={this.handlePressQuoteCurrency}
+            editable={false}
           />
         </KeyboardAvoidingView>
       </Container>

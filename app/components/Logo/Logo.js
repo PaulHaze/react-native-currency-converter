@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import {
   View,
   Text,
@@ -6,44 +8,100 @@ import {
   Image,
   Keyboard,
   Animated,
+  Platform,
+  StyleSheet,
 } from 'react-native';
 import styles from './styles';
 
-class Logo extends Component {
-  componentDidMount() {
-    this.keyboardShowListener = Keyboard.addListener(
-      'keyboardWillShow',
-      this.keyboardShow,
-    );
-    this.keyboardHideListener = Keyboard.addListener(
-      'keyboardWillHide',
-      this.keyboardHide,
-    );
-  }
-  componentWillUnmount() {}
+const ANIMATION_DURATION = 250;
 
-  keyboardShow = () => {
-    console.log('keyboard has shown');
+class Logo extends Component {
+  static propTypes = {
+    tintColor: PropTypes.string,
   };
 
-  keyboardHide = () => {
-    console.log('keyboard has hidden');
+  constructor(props) {
+    super(props);
+    this.state = {
+      containerImageWidth: new Animated.Value(styles.$largeContainerSize),
+      imageWidth: new Animated.Value(styles.$largeImageSize),
+    };
+  }
+
+  componentDidMount() {
+    const name = Platform.OS === 'ios' ? 'Will' : 'Did';
+    this.keyboardDidShowListener = Keyboard.addListener(
+      `keyboard${name}Show`,
+      this.keyboardWillShow,
+    );
+    this.keyboardDidHideListener = Keyboard.addListener(
+      `keyboard${name}Hide`,
+      this.keyboardWillHide,
+    );
+  }
+
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  keyboardWillShow = () => {
+    const { containerImageWidth, imageWidth } = this.state;
+
+    Animated.parallel([
+      Animated.timing(containerImageWidth, {
+        toValue: styles.$smallContainerSize,
+        duration: ANIMATION_DURATION,
+      }),
+      Animated.timing(imageWidth, {
+        toValue: styles.$smallImageSize,
+        duration: ANIMATION_DURATION,
+      }),
+    ]).start();
+  };
+
+  keyboardWillHide = () => {
+    const { containerImageWidth, imageWidth } = this.state;
+
+    Animated.parallel([
+      Animated.timing(containerImageWidth, {
+        toValue: styles.$largeContainerSize,
+        duration: ANIMATION_DURATION,
+      }),
+      Animated.timing(imageWidth, {
+        toValue: styles.$largeImageSize,
+        duration: ANIMATION_DURATION,
+      }),
+    ]).start();
   };
 
   render() {
+    const { containerImageWidth, imageWidth } = this.state;
+    const { tintColor } = this.props;
+
+    const containerImageStyles = [
+      styles.containerImage,
+      { width: containerImageWidth, height: containerImageWidth },
+    ];
+    const imageStyles = [
+      styles.logo,
+      { width: imageWidth },
+      tintColor ? { tintColor } : null,
+    ];
     return (
       <View style={styles.container}>
-        <ImageBackground
-          style={styles.containerImage}
-          resizeMode="contain"
-          source={require('../../assets/logo/background.png')}
-        >
-          <Image
-            style={styles.logo}
+        <Animated.View style={containerImageStyles}>
+          <Animated.Image
             resizeMode="contain"
+            style={[StyleSheet.absoluteFill, containerImageStyles]}
+            source={require('../../assets/logo/background.png')}
+          />
+          <Animated.Image
+            resizeMode="contain"
+            style={imageStyles}
             source={require('../../assets/logo/logo.png')}
           />
-        </ImageBackground>
+        </Animated.View>
         <Text style={styles.text}>Currency Converter</Text>
       </View>
     );
