@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import {
   View,
   Text,
-  ImageBackground,
-  Image,
   Keyboard,
   Animated,
   Platform,

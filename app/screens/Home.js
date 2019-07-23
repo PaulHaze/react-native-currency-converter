@@ -66,8 +66,8 @@ class Home extends Component {
       <Container>
         <StatusBar translucent={false} barStyle="light-content" />
         <Header onPress={this.handleOptionsPress} />
-        <Logo />
         <KeyboardAvoidingView behavior="padding">
+          <Logo />
           <InputWithButton
             keyboardType="numeric"
             buttonText={baseCurrency}
