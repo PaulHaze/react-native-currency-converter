@@ -8,7 +8,7 @@ import styles from './styles';
 const ListItem = ({
   text,
   onPress,
-  customIcon,
+  customIcon = null,
   selected = false,
   checkmark = true,
   visible = true,
@@ -28,7 +28,7 @@ ListItem.propTypes = {
   selected: PropTypes.bool,
   checkmark: PropTypes.bool,
   visible: PropTypes.bool,
-  customIcon: PropTypes.any,
+  customIcon: PropTypes.element,
 };
 
 export default ListItem;

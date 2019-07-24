@@ -41,6 +41,7 @@ class Options extends Component {
               <Ionicons name="ios-link" size={ICON_SIZE} color={ICON_COLOR} />
             }
           />
+          <Separator />
         </SafeAreaView>
       </ScrollView>
     );
