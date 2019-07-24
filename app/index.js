@@ -6,6 +6,9 @@ import Themes from './screens/Themes';
 
 EStyleSheet.build({
   $primaryBlue: '#4F6D7A',
+  $primaryOrange: '#D57A66',
+  $primaryGreen: '#00BD9D',
+  $primaryPurple: '#9E768F',
   $white: '#ffffff',
   $offWhite: 'rgba(255,255,255,0.85)',
   $border: '#E2E2E2',
