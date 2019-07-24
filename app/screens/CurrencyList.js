@@ -1,5 +1,6 @@
+/* eslint-disable no-console */
 import React, { Component } from 'react';
-import { FlatList, View, StatusBar } from 'react-native';
+import { FlatList, View, StatusBar, SafeAreaView } from 'react-native';
 
 import { ListItem, Separator } from '../components/List';
 import currencies from '../data/currencies';
@@ -15,18 +16,20 @@ class CurrencyList extends Component {
     return (
       <View style={{ flex: 1 }}>
         <StatusBar barStyle="default" translucent={false} />
-        <FlatList
-          data={currencies}
-          renderItem={({ item }) => (
-            <ListItem
-              text={item}
-              selected={item === TEMP_CURRENT_CURRENCY}
-              onPress={this.handlePress}
-            />
-          )}
-          keyExtractor={item => item}
-          ItemSeparatorComponent={Separator}
-        />
+        <SafeAreaView>
+          <FlatList
+            data={currencies}
+            renderItem={({ item }) => (
+              <ListItem
+                text={item}
+                selected={item === TEMP_CURRENT_CURRENCY}
+                onPress={this.handlePress}
+              />
+            )}
+            keyExtractor={item => item}
+            ItemSeparatorComponent={Separator}
+          />
+        </SafeAreaView>
       </View>
     );
   }
