@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
 import { StatusBar, KeyboardAvoidingView } from 'react-native';
+import PropTypes from 'prop-types';
 
 import { Container } from '../components/Container';
 import { Header } from '../components/Header';
@@ -15,6 +16,10 @@ const API_URL = 'http://data.fixer.io/api/';
 const CONVERSION_DATE = new Date();
 
 class Home extends Component {
+  static propTypes = {
+    navigation: PropTypes.object,
+  };
+
   constructor(props) {
     super(props);
 
@@ -29,10 +34,14 @@ class Home extends Component {
 
   handlePressBaseCurrency = () => {
     console.log('base currency pressed');
+    const { navigation } = this.props;
+    navigation.navigate('CurrencyList', { title: 'Base Currency' });
   };
 
   handlePressQuoteCurrency = () => {
     console.log('quote currency pressed');
+    const { navigation } = this.props;
+    navigation.navigate('CurrencyList', { title: 'Quote Currency' });
   };
 
   handleOptionsPress = () => {
