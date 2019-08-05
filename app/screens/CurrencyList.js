@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-console */
 import React, { Component } from 'react';
 import { FlatList, View, StatusBar, SafeAreaView } from 'react-native';
@@ -9,7 +10,8 @@ const TEMP_CURRENT_CURRENCY = 'CAD';
 
 class CurrencyList extends Component {
   handlePress = () => {
-    console.log('row pressed');
+    const { navigation } = this.props;
+    navigation.goBack(null);
   };
 
   render() {

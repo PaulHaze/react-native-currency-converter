@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { ScrollView, StatusBar, SafeAreaView } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
@@ -13,8 +15,14 @@ const styles = EStyleSheet.create({
 });
 
 class Themes extends Component {
+  static propTypes = {
+    navigation: PropTypes.object,
+  };
+
   handleThemeChange = color => {
     console.log(`${color} theme pressed`);
+    const { navigation } = this.props;
+    navigation.goBack(null);
   };
 
   render() {

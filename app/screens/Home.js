@@ -33,19 +33,18 @@ class Home extends Component {
   }
 
   handlePressBaseCurrency = () => {
-    console.log('base currency pressed');
     const { navigation } = this.props;
     navigation.navigate('CurrencyList', { title: 'Base Currency' });
   };
 
   handlePressQuoteCurrency = () => {
-    console.log('quote currency pressed');
     const { navigation } = this.props;
     navigation.navigate('CurrencyList', { title: 'Quote Currency' });
   };
 
   handleOptionsPress = () => {
-    console.log('options pressed');
+    const { navigation } = this.props;
+    navigation.navigate('Options');
   };
 
   handleSwitchCurrencies = () => {

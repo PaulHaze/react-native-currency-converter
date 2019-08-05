@@ -3,14 +3,37 @@ import { createAppContainer, createStackNavigator } from 'react-navigation';
 
 import Home from '../screens/Home';
 import CurrencyList from '../screens/CurrencyList';
+import Options from '../screens/Options';
+import Themes from '../screens/Themes';
 
-const AppNavigator = createStackNavigator(
+const HomeStack = createStackNavigator(
   {
     Home: {
       screen: Home,
       navigationOptions: {
         header: () => null,
       },
+    },
+    Options: {
+      screen: Options,
+      navigationOptions: {
+        headerTitle: 'Options',
+      },
+    },
+    Themes: {
+      screen: Themes,
+      navigationOptions: {
+        headerTitle: 'Color Scheme',
+      },
+    },
+  },
+  { headerMode: 'screen' },
+);
+
+const AppNavigator = createStackNavigator(
+  {
+    Home: {
+      screen: HomeStack,
     },
     CurrencyList: {
       screen: CurrencyList,
@@ -22,6 +45,7 @@ const AppNavigator = createStackNavigator(
   {
     mode: 'modal',
     cardStyle: { paddingTop: StatusBar.currentHeight },
+    headerMode: 'none',
   },
 );
 
