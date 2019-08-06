@@ -2,11 +2,11 @@
 /* eslint-disable no-console */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { ScrollView, StatusBar, SafeAreaView, Linking } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import { ListItem, Separator } from '../components/List';
+import { connectAlert } from '../components/Alert';
 
 const ICON_COLOR = '#868686';
 const ICON_SIZE = 23;
@@ -14,6 +14,7 @@ const ICON_SIZE = 23;
 class Options extends Component {
   static propTypes = {
     navigation: PropTypes.object,
+    alertWithType: PropTypes.func,
   };
 
   handleThemesPress = () => {
@@ -22,7 +23,10 @@ class Options extends Component {
   };
 
   handleSitePress = () => {
-    Linking.openURL('http://fixer.io').catch(() => alert('an error occurred'));
+    const { alertWithType } = this.props;
+    Linking.openURL('http://fixer.io').catch(() =>
+      alertWithType('error', 'Sorry!', 'Fixer.io cant be reached right now'),
+    );
   };
 
   render() {
@@ -56,4 +60,4 @@ class Options extends Component {
   }
 }
 
-export default Options;
+export default connectAlert(Options);
