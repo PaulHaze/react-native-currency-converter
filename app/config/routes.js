@@ -30,16 +30,22 @@ const HomeStack = createStackNavigator(
   { headerMode: 'screen' },
 );
 
+const CurrencyListStack = createStackNavigator({
+  CurrencyList: {
+    screen: CurrencyList,
+    navigationOptions: ({ navigation }) => ({
+      headerTitle: navigation.state.params.title,
+    }),
+  },
+});
+
 const AppNavigator = createStackNavigator(
   {
     Home: {
       screen: HomeStack,
     },
     CurrencyList: {
-      screen: CurrencyList,
-      navigationOptions: ({ navigation }) => ({
-        headerTitle: navigation.state.params.title,
-      }),
+      screen: CurrencyListStack,
     },
   },
   {

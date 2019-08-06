@@ -1,8 +1,9 @@
+/* eslint-disable no-alert */
 /* eslint-disable no-console */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { ScrollView, StatusBar, SafeAreaView } from 'react-native';
+import { ScrollView, StatusBar, SafeAreaView, Linking } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import { ListItem, Separator } from '../components/List';
@@ -21,7 +22,7 @@ class Options extends Component {
   };
 
   handleSitePress = () => {
-    console.log('site pressed');
+    Linking.openURL('http://fixer.io').catch(() => alert('an error occurred'));
   };
 
   render() {

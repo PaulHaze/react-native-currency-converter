@@ -22,7 +22,7 @@ class Themes extends Component {
   handleThemeChange = color => {
     console.log(`${color} theme pressed`);
     const { navigation } = this.props;
-    navigation.goBack(null);
+    navigation.goBack();
   };
 
   render() {
