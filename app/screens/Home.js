@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { StatusBar, KeyboardAvoidingView } from 'react-native';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import { Container } from '../components/Container';
 import { Header } from '../components/Header';
@@ -11,6 +12,8 @@ import { InputWithButton } from '../components/TextInput';
 import { SwitchCurrencyButton } from '../components/Buttons';
 import { LastConverted } from '../components/Text';
 
+import { swapCurrency, changeCurrencyAmount } from '../actions/currencies';
+
 const API_KEY = 'b75149abcbe55c561817ab5976d0a184';
 const API_URL = 'http://data.fixer.io/api/';
 const CONVERSION_DATE = new Date();
@@ -18,6 +21,7 @@ const CONVERSION_DATE = new Date();
 class Home extends Component {
   static propTypes = {
     navigation: PropTypes.object,
+    dispatch: PropTypes.func,
   };
 
   constructor(props) {
@@ -48,6 +52,8 @@ class Home extends Component {
   };
 
   handleSwitchCurrencies = () => {
+    const { dispatch } = this.props;
+    dispatch(swapCurrency());
     this.setState(prevState => ({
       baseCurrency: prevState.quoteCurrency,
       quoteCurrency: prevState.baseCurrency,
@@ -57,6 +63,8 @@ class Home extends Component {
   };
 
   handleTextChange = value => {
+    const { dispatch } = this.props;
+    dispatch(changeCurrencyAmount(value));
     this.setState({
       currencyAmount: Number(value),
     });
@@ -107,4 +115,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default connect()(Home);
