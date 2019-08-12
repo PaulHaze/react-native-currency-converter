@@ -1,10 +1,18 @@
+/* eslint-disable react/static-property-placement */
+/* eslint-disable react/state-in-constructor */
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
+
+// REACT IMPORTS
 import React, { Component } from 'react';
 import { StatusBar, KeyboardAvoidingView } from 'react-native';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
+// REDUX IMPORTS
+import { connect } from 'react-redux';
+import { swapCurrency, changeCurrencyAmount } from '../actions/currencies';
+
+// COMPONENT IMPORTS
 import { Container } from '../components/Container';
 import { Header } from '../components/Header';
 import { Logo } from '../components/Logo';
@@ -12,8 +20,7 @@ import { InputWithButton } from '../components/TextInput';
 import { SwitchCurrencyButton } from '../components/Buttons';
 import { LastConverted } from '../components/Text';
 
-import { swapCurrency, changeCurrencyAmount } from '../actions/currencies';
-
+// API DETAILS
 const API_KEY = 'b75149abcbe55c561817ab5976d0a184';
 const API_URL = 'http://data.fixer.io/api/';
 const CONVERSION_DATE = new Date();
@@ -30,8 +37,8 @@ class Home extends Component {
     this.state = {
       currencyAmount: 100,
       exchangeAmount: 69.67,
-      baseCurrency: 'AUD',
-      quoteCurrency: 'USD',
+      stateBaseCurrency: 'AUD',
+      stateQuoteCurrency: 'USD',
       exchangeRate: 0.6997,
     };
   }
@@ -54,12 +61,12 @@ class Home extends Component {
   handleSwitchCurrencies = () => {
     const { dispatch } = this.props;
     dispatch(swapCurrency());
-    this.setState(prevState => ({
-      baseCurrency: prevState.quoteCurrency,
-      quoteCurrency: prevState.baseCurrency,
-      currencyAmount: prevState.exchangeAmount,
-      exchangeAmount: prevState.currencyAmount,
-    }));
+    // this.setState(prevState => ({
+    //   baseCurrency: prevState.quoteCurrency,
+    //   quoteCurrency: prevState.baseCurrency,
+    //   currencyAmount: prevState.exchangeAmount,
+    //   exchangeAmount: prevState.currencyAmount,
+    // }));
   };
 
   handleTextChange = value => {
@@ -78,6 +85,7 @@ class Home extends Component {
       exchangeAmount,
       exchangeRate,
     } = this.state;
+    // const { baseCurrency, quoteCurrency } = this.props;
     return (
       <Container>
         <StatusBar translucent={false} barStyle="light-content" />
@@ -86,7 +94,7 @@ class Home extends Component {
           <Logo />
           <InputWithButton
             keyboardType="numeric"
-            buttonText={baseCurrency}
+            buttonText={this.props.baseCurrency}
             defaultValue={currencyAmount.toString()}
             onPress={this.handlePressBaseCurrency}
             onChangeText={this.handleTextChange}
@@ -115,4 +123,14 @@ class Home extends Component {
   }
 }
 
-export default connect()(Home);
+const mapStateToProps = state => {
+  // const { baseCurrency, quoteCurrency } = state.currencies;
+  const baseCurrency = state.currencies.baseCurrency;
+  const quoteCurrency = state.currencies.quoteCurrency;
+  return {
+    baseCurrency,
+    quoteCurrency,
+  };
+};
+
+export default connect(mapStateToProps)(Home);
