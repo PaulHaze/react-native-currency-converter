@@ -1,16 +1,27 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable no-console */
+
+// REACT IMPORTS
 import React, { Component } from 'react';
 import { FlatList, View, StatusBar, SafeAreaView } from 'react-native';
+import PropTypes from 'prop-types';
 
+// REDUX IMPORTS
+import { connect } from 'react-redux';
+import { changeBaseCurrency, changeQuoteCurrency } from '../actions/currencies';
+
+// COMPONENT IMPORTS
 import { ListItem, Separator } from '../components/List';
 import currencies from '../data/currencies';
 
-const TEMP_CURRENT_CURRENCY = 'CAD';
-
 class CurrencyList extends Component {
-  handlePress = () => {
-    const { navigation } = this.props;
+  handlePress = currency => {
+    const { navigation, dispatch } = this.props;
+    const { type } = navigation.state.params;
+    if (type === 'base') {
+      dispatch(changeBaseCurrency(currency));
+    } else if (type === 'quote') {
+      dispatch(changeQuoteCurrency(currency));
+    }
     navigation.goBack(null);
   };
 
@@ -24,8 +35,8 @@ class CurrencyList extends Component {
             renderItem={({ item }) => (
               <ListItem
                 text={item}
-                selected={item === TEMP_CURRENT_CURRENCY}
-                onPress={this.handlePress}
+                selected={item === 'USD'}
+                onPress={() => this.handlePress(item)}
               />
             )}
             keyExtractor={item => item}
@@ -37,4 +48,9 @@ class CurrencyList extends Component {
   }
 }
 
-export default CurrencyList;
+CurrencyList.propTypes = {
+  navigation: PropTypes.object,
+  dispatch: PropTypes.func,
+};
+
+export default connect()(CurrencyList);
