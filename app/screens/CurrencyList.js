@@ -26,6 +26,8 @@ class CurrencyList extends Component {
   };
 
   render() {
+    const { navigation } = this.props;
+    const { selectedCurrency } = navigation.state.params;
     return (
       <View style={{ flex: 1 }}>
         <StatusBar barStyle="default" translucent={false} />
@@ -35,7 +37,7 @@ class CurrencyList extends Component {
             renderItem={({ item }) => (
               <ListItem
                 text={item}
-                selected={item === 'USD'}
+                selected={item === selectedCurrency}
                 onPress={() => this.handlePress(item)}
               />
             )}
