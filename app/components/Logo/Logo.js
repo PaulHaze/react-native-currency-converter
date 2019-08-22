@@ -1,3 +1,5 @@
+/* eslint-disable react/state-in-constructor */
+/* eslint-disable react/static-property-placement */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -20,6 +22,7 @@ class Logo extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       containerImageWidth: new Animated.Value(styles.$largeContainerSize),
       imageWidth: new Animated.Value(styles.$largeImageSize),
