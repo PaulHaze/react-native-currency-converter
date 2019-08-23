@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-prop-types */
 /* eslint-disable no-console */
 
 // REACT IMPORTS
@@ -26,6 +27,14 @@ class CurrencyList extends Component {
   };
 
   render() {
+    // const { navigation, baseCurrency, quoteCurrency } = this.props;
+    // const { selectedCurrency, type } = navigation.state.params;
+    // const { type } = navigation.state.params;
+    // let comparisonCurrency = baseCurrency;
+    // if (type === 'quote') {
+    //   comparisonCurrency = quoteCurrency;
+    // }
+
     const { navigation } = this.props;
     const { selectedCurrency } = navigation.state.params;
     return (
@@ -53,6 +62,15 @@ class CurrencyList extends Component {
 CurrencyList.propTypes = {
   navigation: PropTypes.object,
   dispatch: PropTypes.func,
+  baseCurrency: PropTypes.string,
+  quoteCurrency: PropTypes.string,
 };
 
-export default connect()(CurrencyList);
+const mapStateToProps = state => {
+  return {
+    baseCurrency: state.currencies.baseCurrency,
+    quoteCurrency: state.currencies.quoteCurrency,
+  };
+};
+
+export default connect(mapStateToProps)(CurrencyList);
