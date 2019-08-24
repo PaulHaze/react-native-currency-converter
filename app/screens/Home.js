@@ -26,17 +26,6 @@ const API_URL = 'http://data.fixer.io/api/';
 const CONVERSION_DATE = new Date();
 
 class Home extends Component {
-  static propTypes = {
-    navigation: PropTypes.object,
-    dispatch: PropTypes.func,
-    baseCurrency: PropTypes.string,
-    quoteCurrency: PropTypes.string,
-    amount: PropTypes.number,
-    conversionRate: PropTypes.number,
-    isFetching: PropTypes.bool,
-    conversionDate: PropTypes.object,
-  };
-
   handlePressBaseCurrency = () => {
     const { navigation, baseCurrency } = this.props;
     navigation.navigate('CurrencyList', {
@@ -78,6 +67,7 @@ class Home extends Component {
       conversionRate,
       conversionDate,
       isFetching,
+      themeColor,
     } = this.props;
 
     const quotePrice = isFetching
@@ -85,12 +75,13 @@ class Home extends Component {
       : (amount * conversionRate).toFixed(2);
 
     return (
-      <Container>
+      <Container themeColor={themeColor}>
         <StatusBar translucent={false} barStyle="light-content" />
         <Header onPress={this.handleOptionsPress} />
         <KeyboardAvoidingView behavior="padding">
-          <Logo />
+          <Logo tintColor={themeColor} />
           <InputWithButton
+            themeColor={themeColor}
             keyboardType="numeric"
             buttonText={baseCurrency}
             defaultValue={amount.toString()}
@@ -110,6 +101,7 @@ class Home extends Component {
             exchangeRate={conversionRate}
           />
           <InputWithButton
+            themeColor={themeColor}
             buttonText={quoteCurrency}
             defaultValue={quotePrice.toString()}
             onPress={this.handlePressQuoteCurrency}
@@ -121,8 +113,21 @@ class Home extends Component {
   }
 }
 
+Home.propTypes = {
+  navigation: PropTypes.object,
+  dispatch: PropTypes.func,
+  baseCurrency: PropTypes.string,
+  quoteCurrency: PropTypes.string,
+  amount: PropTypes.number,
+  conversionRate: PropTypes.number,
+  isFetching: PropTypes.bool,
+  conversionDate: PropTypes.object,
+  themeColor: PropTypes.string,
+};
+
 const mapStateToProps = state => {
   const { baseCurrency, quoteCurrency, amount, conversions } = state.currencies;
+  const { themeColor } = state.themes;
   const conversionSelector = conversions[baseCurrency] || {};
   const rates = conversionSelector.rates || {};
   return {
@@ -134,6 +139,7 @@ const mapStateToProps = state => {
       ? new Date(conversionSelector.date)
       : new Date(),
     isFetching: conversionSelector.isFetching,
+    themeColor,
   };
 };
 
