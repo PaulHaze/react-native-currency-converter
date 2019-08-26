@@ -130,6 +130,7 @@ const mapStateToProps = state => {
   const { themeColor } = state.themes;
   const conversionSelector = conversions[baseCurrency] || {};
   const rates = conversionSelector.rates || {};
+
   return {
     baseCurrency,
     quoteCurrency,
