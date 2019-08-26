@@ -22,7 +22,7 @@ import { LastConverted } from '../components/Text';
 
 // API DETAILS
 const API_KEY = 'b75149abcbe55c561817ab5976d0a184';
-const API_URL = 'http://data.fixer.io/api/';
+const API_URL = 'https://fixer.handlebarlabs.com/';
 const CONVERSION_DATE = new Date();
 
 class Home extends Component {
